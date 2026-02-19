@@ -1,1 +1,315 @@
-index
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TideeUp — Weekly Cleaning Plan in Minutes</title>
+  <meta name="description" content="Take a 60-second quiz and get a weekly cleaning plan built around your time, your home, and your life." />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1620;
+      --text:#eaf0f7;
+      --muted:#a9b7c8;
+      --line:#1e2a3a;
+      --accent:#7dd3fc;
+      --accent2:#a78bfa;
+      --btn:#eaf0f7;
+      --btnText:#0b0f14;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(125,211,252,.18), transparent 55%),
+                  radial-gradient(900px 600px at 90% 0%, rgba(167,139,250,.18), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px}
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:10px 0 22px;border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+    .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+    nav{display:flex;gap:14px;flex-wrap:wrap}
+    nav a{color:var(--muted);text-decoration:none;font-size:14px}
+    nav a:hover{color:var(--text)}
+    .hero{padding:44px 0 26px;display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    h1{font-size:44px;line-height:1.08;margin:0 0 14px}
+    @media (max-width:520px){h1{font-size:34px}}
+    .sub{color:var(--muted);font-size:17px;margin:0 0 18px;max-width:52ch}
+    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);
+      text-decoration:none;font-weight:700;font-size:15px;
+    }
+    .btn.primary{background:var(--btn);color:var(--btnText);border-color:transparent}
+    .btn.primary:hover{filter:brightness(.95)}
+    .btn.ghost{background:rgba(255,255,255,.04);color:var(--text)}
+    .btn.ghost:hover{background:rgba(255,255,255,.07)}
+    .pillRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .pill{
+      font-size:12px;color:var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      padding:7px 10px;border-radius:999px;
+      background:rgba(255,255,255,.03);
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:18px;
+    }
+    .card h3{margin:0 0 10px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+    .kpi > div{padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(0,0,0,.12)}
+    .kpi b{display:block;font-size:18px}
+    section{padding:28px 0}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width:900px){.grid3{grid-template-columns:1fr}}
+    .sectionTitle{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .sectionTitle h2{margin:0;font-size:22px}
+    .sectionTitle p{margin:0;color:var(--muted);font-size:14px}
+    .steps{counter-reset:step}
+    .step{
+      position:relative;
+      padding-left:44px;
+    }
+    .step:before{
+      counter-increment:step;
+      content:counter(step);
+      position:absolute;left:16px;top:14px;
+      width:24px;height:24px;border-radius:999px;
+      display:grid;place-items:center;
+      font-weight:800;font-size:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#0b0f14;
+    }
+    .price{
+      display:grid;grid-template-columns:1fr 1fr;gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width:900px){.price{grid-template-columns:1fr}}
+    .price h3{margin:0 0 6px}
+    .price .amt{font-size:34px;font-weight:900;margin:8px 0 6px}
+    .price ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+    .price li{margin:6px 0}
+    .faq details{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:12px 14px;
+      background:rgba(255,255,255,.02);
+      margin:10px 0;
+    }
+    .faq summary{cursor:pointer;font-weight:700}
+    footer{
+      padding:22px 0 40px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+    .small{font-size:12px;color:var(--muted)}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <span class="dot"></span>
+        <span>TideeUp</span>
+      </div>
+      <nav>
+        <a href="#how">How it works</a>
+        <a href="#whats-included">What you get</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div>
+          <h1>A clean home — without the all-day clean.</h1>
+          <p class="sub">
+            Take a 60-second quiz and get a weekly plan built around your time, your home, and your life.
+            No perfection. Just momentum.
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn primary" href="YOUR_TALLY_LINK_HERE" target="_blank" rel="noopener">Take the Quiz</a>
+            <a class="btn ghost" href="#pricing">See Pricing</a>
+          </div>
+
+          <div class="pillRow">
+            <span class="pill">10 / 20 / 30 min options</span>
+            <span class="pill">Weekly plan delivered by email</span>
+            <span class="pill">Pet-aware (if needed)</span>
+          </div>
+
+          <div style="margin-top:16px" class="badge">
+            <span>💬</span>
+            <span><b>Weekly Motivation:</b> Done is better than perfect. Progress compounds.</span>
+          </div>
+
+          <p class="small" style="margin-top:10px">
+            You’ll get your first plan shortly after completing the quiz. (We’ll confirm timing based on your setup.)
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>What you’ll receive</h3>
+          <p>
+            A simple weekly game plan (Mon–Sun) plus a daily reset — sized to your home and the time you actually have.
+          </p>
+          <div class="kpi">
+            <div><b>1</b><span class="small">Weekly plan</span></div>
+            <div><b>7</b><span class="small">Daily tasks</span></div>
+            <div><b>1</b><span class="small">Daily reset</span></div>
+            <div><b>0</b><span class="small">Overwhelm</span></div>
+          </div>
+          <div style="margin-top:14px">
+            <a class="btn primary" style="width:100%" href="YOUR_TALLY_LINK_HERE" target="_blank" rel="noopener">Start in 60 seconds</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="how">
+        <div class="sectionTitle">
+          <h2>How it works</h2>
+          <p>Simple, fast, and built for real life.</p>
+        </div>
+
+        <div class="grid3 steps">
+          <div class="card step">
+            <h3>Take the quiz</h3>
+            <p>Tell us your home size, available time, and any factors like pets.</p>
+          </div>
+          <div class="card step">
+            <h3>We build your plan</h3>
+            <p>Your plan is generated to match your time capacity — not an unrealistic “perfect home” standard.</p>
+          </div>
+          <div class="card step">
+            <h3>Get it weekly by email</h3>
+            <p>We deliver a clear weekly plan with encouragement, so you keep momentum without burn-out.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="whats-included">
+        <div class="sectionTitle">
+          <h2>What you get</h2>
+          <p>Focus on consistency. We handle the structure.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>Weekly plan (Mon–Sun)</h3>
+            <p>Balanced across the week so one day doesn’t become a “cleaning marathon.”</p>
+          </div>
+          <div class="card">
+            <h3>Daily reset</h3>
+            <p>A small baseline that keeps the house from sliding backward.</p>
+          </div>
+          <div class="card">
+            <h3>Smart adjustments</h3>
+            <p>Time tier + home size + optional pet adjustments to keep plans realistic.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing">
+        <div class="sectionTitle">
+          <h2>Pricing</h2>
+          <p>Start simple. Upgrade later if you want.</p>
+        </div>
+
+        <div class="price">
+          <div class="card">
+            <h3>Starter</h3>
+            <div class="amt">$9<span style="font-size:14px;font-weight:700;color:var(--muted)">/mo</span></div>
+            <p class="small">Example pricing — change this to your real offer.</p>
+            <ul>
+              <li>Weekly plan delivered by email</li>
+              <li>Daily reset included</li>
+              <li>Time-based plans (10/20/30/BATCH)</li>
+            </ul>
+            <div style="margin-top:14px">
+              <a class="btn primary" style="width:100%" href="YOUR_TALLY_LINK_HERE" target="_blank" rel="noopener">Take the Quiz</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Pro (later)</h3>
+            <div class="amt">$19<span style="font-size:14px;font-weight:700;color:var(--muted)">/mo</span></div>
+            <p class="small">Optional future tier — don’t build until you have demand.</p>
+            <ul>
+              <li>Priority adjustments (schedule changes)</li>
+              <li>Extra rotation depth (pets, high-traffic)</li>
+              <li>Monthly deep-clean focus plan</li>
+            </ul>
+            <div style="margin-top:14px">
+              <a class="btn ghost" style="width:100%" href="#faq">See FAQs</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="faq">
+        <div class="sectionTitle">
+          <h2>FAQ</h2>
+          <p>Keep it simple. Keep it moving.</p>
+        </div>
+
+        <details>
+          <summary>How fast do I get my first plan?</summary>
+          <p class="small">You’ll receive your first weekly plan shortly after completing the quiz. (Update this line once you decide your exact turnaround.)</p>
+        </details>
+        <details>
+          <summary>What if I miss a day?</summary>
+          <p class="small">No guilt. No reset ritual. Just pick up the next day. Consistency beats intensity.</p>
+        </details>
+        <details>
+          <summary>Can I change my time or home details later?</summary>
+          <p class="small">Yes — you can re-take the quiz or reply to your weekly email with updates.</p>
+        </details>
+        <details>
+          <summary>Does it work if I have pets?</summary>
+          <p class="small">Yes — if you select pets, your plan includes light daily upkeep and rotating deeper pet tasks.</p>
+        </details>
+
+        <div style="margin-top:14px">
+          <a class="btn primary" href="YOUR_TALLY_LINK_HERE" target="_blank" rel="noopener">Take the Quiz</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> TideeUp</div>
+      <div class="small">
+        Questions? Email <a href="mailto:YOUR_SUPPORT_EMAIL">YOUR_SUPPORT_EMAIL</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
